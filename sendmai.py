@@ -22,11 +22,10 @@ def index():
     title = messages['title']
     content = messages['content']
     tolist = messages['tolist']
-    #tolist = request.args.get('tolist')
     tolist = str(tolist).split(',')
     cc = messages['cc']
     status = sendmail(title,content,tolist,cc)
-    return "200"
+    return status
 
 def send_async_email(app,msg):
     with app.app_context():
