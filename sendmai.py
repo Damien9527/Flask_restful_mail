@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # coding:utf-8
 from flask import Flask,request
+import threading
 from flask_mail import Mail, Message
 app = Flask(__name__)
 app.config['MAIL_SERVER'] = 'smtp.139.com'
@@ -11,8 +12,7 @@ app.config['MAIL_PASSWORD'] = '******'
 app.config['MAIL_DEFAULT_SENDER'] = 'xw9527@139.com'
 mail = Mail(app)
 
-import threading
-from flask_request_params import bind_request_params
+ 
 
 app.before_request(bind_request_params)
 
