@@ -33,8 +33,7 @@ def sendmail(title,content,tolist,cc):
     thr = threading.Thread(target=send_async_email, args=[app,msg])#创建线程
     thr.start()
     return thr
-    mail.send(msg)
-    return 'success'
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0',debug=True)
