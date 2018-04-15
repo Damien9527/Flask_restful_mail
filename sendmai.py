@@ -7,7 +7,7 @@ app.config['MAIL_SERVER'] = 'smtp.139.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USE_SSL'] = True
 app.config['MAIL_USERNAME'] = 'xw9527@139.com'
-app.config['MAIL_PASSWORD'] = 'xw1916139'
+app.config['MAIL_PASSWORD'] = '******'
 app.config['MAIL_DEFAULT_SENDER'] = 'xw9527@139.com'
 mail = Mail(app)
 
@@ -24,15 +24,16 @@ def index():
     tolist = messages['tolist']
     #tolist = request.args.get('tolist')
     tolist = str(tolist).split(',')
-    status = sendmail(title,content,tolist)
+    cc = messages['cc']
+    status = sendmail(title,content,tolist,cc)
     return "200"
 
 def send_async_email(app,msg):
     with app.app_context():
         mail.send(msg)
 
-def sendmail(title,content,tolist):
-    msg = Message(title , recipients=tolist,bcc=['xiewei@staff.sina.com.cn'])
+def sendmail(title,content,tolist,cc):
+    msg = Message(title , recipients=tolist,cc=cc)
     msg.html = content
     thr = threading.Thread(target=send_async_email, args=[app,msg])#创建线程
     thr.start()
