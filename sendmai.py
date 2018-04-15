@@ -12,10 +12,6 @@ app.config['MAIL_PASSWORD'] = '******'
 app.config['MAIL_DEFAULT_SENDER'] = 'xw9527@139.com'
 mail = Mail(app)
 
- 
-
-app.before_request(bind_request_params)
-
 @app.route('/sendMail',methods=['POST','GET'])
 def index():
     messages = request.values.to_dict()
